@@ -22,7 +22,7 @@ public partial class MainForm : Form
     {
         if (nameNoteTextBox.Text == string.Empty || textNoteTextBox.Text == string.Empty)
         {
-            MessageBox.Show("Not all data is entered!");
+            MessageBox.Show("Відсутні дані!");
 
             return;
         }
@@ -38,7 +38,7 @@ public partial class MainForm : Form
 
         _db.SaveChanges();
 
-        MessageBox.Show("Saved successfully!");
+        MessageBox.Show("Успішно збережено!");
 
         nameNoteTextBox.Text = string.Empty;
 

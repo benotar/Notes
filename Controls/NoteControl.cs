@@ -13,9 +13,9 @@ public partial class NoteControl : UserControl
         string createDate = CreateDateLabel.Text;
         string text = TextNoteLabel.Text;
 
-        string message = $"Name: {name}\n"
-            + $"Create date: {createDate}\n"
-            + text;
+        string message = $"Назва: {name}\n\n"
+            + $"Дата створення: {createDate}\n\n"
+            + "Нотатка: " + text + ".";
 
         MessageBox.Show(message);
     }
