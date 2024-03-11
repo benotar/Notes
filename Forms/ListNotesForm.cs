@@ -1,17 +1,20 @@
 ﻿using HW_UsersControls.Classes;
 using HW_UsersControls.Controls;
+using HW_UsersControls.Data;
 
 namespace HW_UsersControls.Forms;
 
 public partial class ListNotesForm : Form
 {
-    private List<Note> _notes;
+    //private List<Note> _notes;
+
+    DataContext _db;
 
     private int _nextY = 10;
 
-    public ListNotesForm(List<Note> notes)
+    public ListNotesForm(DataContext db)
     {
-        _notes = notes;
+        _db = db;
 
         InitializeComponent();
     }
@@ -23,12 +26,12 @@ public partial class ListNotesForm : Form
     
     private void RenderNotes()
     {
-        if (_notes is null)
+        if (_db is null)
         {
             return;
         }
 
-        for (int i = 0; i < _notes.Count; i++)
+        for (int i = 0; i < _db.Notes.Count(); i++)
         {
             RenderNote(i);
         }
@@ -37,7 +40,7 @@ public partial class ListNotesForm : Form
 
     private void RenderNote(int index)
     {
-        Note note = _notes[index];
+        Note note = _db.Notes.ToList()[index];
 
         NoteControl noteControl = new NoteControl();
 

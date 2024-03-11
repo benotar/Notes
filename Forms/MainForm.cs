@@ -1,13 +1,20 @@
 using HW_UsersControls.Classes;
+using HW_UsersControls.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace HW_UsersControls.Forms;
 
 public partial class MainForm : Form
 {
-    public List<Note> _notes; 
-    public MainForm()
+    //public List<Note> _notes;
+
+    DataContext _db;
+
+    public MainForm(DbContextOptions<DataContext> options)
     {
-        _notes = new List<Note>();
+        _db = new(options);
+        _db.Database.EnsureCreated();
+
         InitializeComponent();
     }
 
@@ -27,7 +34,9 @@ public partial class MainForm : Form
             CreateTime = DateTime.Now
         };
 
-        _notes.Add(tempNote);
+        _db.Notes.Add(tempNote);
+
+        _db.SaveChanges();
 
         MessageBox.Show("Saved successfully!");
 
@@ -39,7 +48,7 @@ public partial class MainForm : Form
 
     private void ShowListNotesButtonCkick(object sender, EventArgs e)
     {
-        ListNotesForm listNotes = new ListNotesForm(_notes);
+        ListNotesForm listNotes = new ListNotesForm(_db);
 
         listNotes.Show();
     }
