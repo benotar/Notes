@@ -10,9 +10,9 @@ public partial class MainForm : Form
 
     DataContext _db;
 
-    public MainForm(DbContextOptions<DataContext> options)
+    public MainForm(DataContext db)
     {
-        _db = new(options);
+        _db = db;
         _db.Database.EnsureCreated();
 
         InitializeComponent();

@@ -20,10 +20,10 @@ namespace HW_UsersControls
             string? stringConnection = config.GetConnectionString("DefaultConnection");
             DbContextOptionsBuilder<DataContext> optionsBuilder = new DbContextOptionsBuilder<DataContext>();
             DbContextOptions<DataContext> options = optionsBuilder.UseMySql(stringConnection, ServerVersion.Parse("8.0.30-mysql")).Options;
-
+            DataContext db = new DataContext(options);
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm(options));
+            Application.Run(new MainForm(db));
         }
     }
 }
